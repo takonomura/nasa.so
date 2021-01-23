@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"strings"
 
+	"golang.org/x/net/idna"
 	"robpike.io/nihongo"
 )
 
@@ -55,7 +56,7 @@ func main() {
 
 func handleHTTP(w http.ResponseWriter, r *http.Request) {
 	sub, domain := parseHost(r.Host)
-	title := nihongo.HiraganaString(sub) + "なさそう"
+	title := convertSubdomain(sub) + "なさそう"
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	indexTemplate.Execute(w, struct {
 		Title  string
@@ -72,4 +73,12 @@ func parseHost(host string) (sub, domain string) {
 		return "", "nasa.so"
 	}
 	return strings.TrimSuffix(host, ".nasa.so"), host
+}
+
+func convertSubdomain(sub string) string {
+	if strings.HasPrefix(sub, "xn--") {
+		s, _ := idna.ToUnicode(sub)
+		return s
+	}
+	return nihongo.HiraganaString(sub)
 }
