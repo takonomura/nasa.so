@@ -11,7 +11,7 @@ import (
 )
 
 var indexTemplate = template.Must(template.New("index").Parse(`<!DOCTYPE html>
-<html lang="lang">
+<html lang="ja">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
