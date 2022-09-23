@@ -25,6 +25,9 @@ func main() {
 func handleHTTP(w http.ResponseWriter, r *http.Request) {
 	sub, domain := parseHost(r.Host)
 	title := convertSubdomain(sub) + "なさそう"
+	if path := strings.TrimPrefix(r.URL.Path, "/"); path != "" {
+		title += nihongo.HiraganaString(path)
+	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	htmlTemplate.Execute(w, struct {
 		Title  string
