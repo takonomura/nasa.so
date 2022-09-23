@@ -2,10 +2,13 @@ package main
 
 import (
 	"embed"
+	"encoding/json"
+	"fmt"
 	"html/template"
 	"log"
 	"net/http"
 	"strings"
+	"time"
 
 	"golang.org/x/net/idna"
 	"robpike.io/nihongo"
@@ -28,7 +31,39 @@ func main() {
 	mux.Handle("/favicon.ico", fs)
 	mux.Handle("/icon-128.png", fs)
 
-	log.Fatal(http.ListenAndServe("127.0.0.1:5000", mux))
+	log.Println("Serve on :8080")
+	log.Fatal(http.ListenAndServe(":8080", logRequest(mux)))
+}
+
+func logRequest(h http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		v := struct {
+			Date       string              `json:"date"`
+			RemoteAddr string              `json:"remote_addr"`
+			Method     string              `json:"method"`
+			URI        string              `json:"uri"`
+			Host       string              `json:"host"`
+			Referrer   string              `json:"referrer"`
+			UserAgent  string              `json:"user_agent"`
+			Headers    map[string][]string `json:"headers"`
+		}{
+			Date:       time.Now().Format("2006-01-02 15:04:05"),
+			RemoteAddr: r.RemoteAddr,
+			Method:     r.Method,
+			URI:        r.RequestURI,
+			Host:       r.Host,
+			Referrer:   r.Referer(),
+			UserAgent:  r.UserAgent(),
+			Headers:    r.Header,
+		}
+		b, err := json.Marshal(v)
+		if err != nil {
+			log.Printf("marshaling log: %v", err)
+		} else {
+			fmt.Println(string(b))
+		}
+		h.ServeHTTP(w, r)
+	})
 }
 
 func handleHTTP(w http.ResponseWriter, r *http.Request) {
