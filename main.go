@@ -73,7 +73,7 @@ func handleHTTP(w http.ResponseWriter, r *http.Request) {
 		title += nihongo.HiraganaString(path)
 	}
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
-	if title != "なさそう" {
+	if title != "なさそう" || strings.ToLower(r.Host) != "nasa.so" {
 		w.Header().Set("X-Robots-Tag", "noindex")
 	}
 	htmlTemplate.Execute(w, struct {
