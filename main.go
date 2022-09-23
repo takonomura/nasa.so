@@ -1,7 +1,7 @@
 package main
 
 import (
-	_ "embed"
+	"embed"
 	"html/template"
 	"log"
 	"net/http"
@@ -14,12 +14,21 @@ import (
 var (
 	//go:embed index.html.tmpl
 	html string
+	//go:embed favicon.ico icon-128.png
+	publicFiles embed.FS
 )
 
 var htmlTemplate = template.Must(template.New("index").Parse(html))
 
 func main() {
-	log.Fatal(http.ListenAndServe("127.0.0.1:5000", http.HandlerFunc(handleHTTP)))
+	mux := http.NewServeMux()
+	mux.HandleFunc("/", handleHTTP)
+
+	fs := http.FileServer(http.FS(publicFiles))
+	mux.Handle("/favicon.ico", fs)
+	mux.Handle("/icon-128.png", fs)
+
+	log.Fatal(http.ListenAndServe("127.0.0.1:5000", mux))
 }
 
 func handleHTTP(w http.ResponseWriter, r *http.Request) {
