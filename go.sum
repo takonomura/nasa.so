@@ -1,6 +1,6 @@
-golang.org/x/net v0.0.0-20220921203646-d300de134e69 h1:hUJpGDpnfwdJW8iNypFjmSY0sCBEL+spFTZ2eO+Sfps=
-golang.org/x/net v0.0.0-20220921203646-d300de134e69/go.mod h1:YDH+HFinaLZZlnHAfSS6ZXJJ9M9t4Dl22yv3iI2vPwk=
-golang.org/x/text v0.3.7 h1:olpwvP2KacW1ZWvsR7uQhoyTYvKAupfQrRGBFM352Gk=
-golang.org/x/text v0.3.7/go.mod h1:u+2+/6zg+i71rQMx5EYifcz6MCKuco9NR6JIITiCfzQ=
-robpike.io/nihongo v0.0.0-20200511095354-a985f0929cfa h1:kqGRKbVGwPB5mg/++wMQxOybtmW0F8uC/y+Wmjipsvc=
-robpike.io/nihongo v0.0.0-20200511095354-a985f0929cfa/go.mod h1:43kowN+1Rj2cR4+62PIiOFD5L9AoTNCpNNjQibm7Dq0=
+golang.org/x/net v0.24.0 h1:1PcaxkF854Fu3+lvBIx5SYn9wRlBzzcnHZSiaFFAb0w=
+golang.org/x/net v0.24.0/go.mod h1:2Q7sJY5mzlzWjKtYUEXSlBWCdyaioyXzRB2RtU8KVE8=
+golang.org/x/text v0.14.0 h1:ScX5w1eTa3QqT8oi6+ziP7dTV1S2+ALU0bI+0zXKWiQ=
+golang.org/x/text v0.14.0/go.mod h1:18ZOQIKpY8NJVqYksKHtTdi31H5itFRjB5/qKTNYzSU=
+robpike.io/nihongo v0.0.0-20230705220025-ab7f6184a918 h1:5a2reXUbTO/+h+sdxIPpJkNieR1TH6hYhtPD6nLZNYM=
+robpike.io/nihongo v0.0.0-20230705220025-ab7f6184a918/go.mod h1:43kowN+1Rj2cR4+62PIiOFD5L9AoTNCpNNjQibm7Dq0=
