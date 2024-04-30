@@ -1,6 +1,6 @@
 module github.com/takonomura/nasa.so
 
-go 1.19
+go 1.22.2
 
 require (
 	golang.org/x/net v0.0.0-20220921203646-d300de134e69
