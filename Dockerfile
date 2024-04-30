@@ -8,7 +8,7 @@ RUN go mod download
 COPY * ./
 RUN CGO_ENABLED=0 go build -o nasaso .
 
-FROM docker.io/library/alpine:3.16.2@sha256:1304f174557314a7ed9eddb4eab12fed12cb0cd9809e4c28f29af86979a3c870
+FROM docker.io/library/alpine:3.19.1@sha256:c5b1261d6d3e43071626931fc004f70149baeba2c8ec672bd4f27761f8e1ad6b
 
 COPY --from=build /app/nasaso /nasaso
 
